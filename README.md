@@ -68,14 +68,12 @@ Data Structure Garden
 
 ## Audio Mechanic
 
-（100+ words）
-
-[Image / sketch]
-
 ---
 
 ## User Input Mechanic
 
-（100+ words）
+---
 
-[Image / sketch]
+# Part 3: Putting It Together
+
+All mechanics exist within the same evolving digital garden. The generative flower system creates the main visual environment, while mouse interaction introduces layered parallax movement and depth illusion, making the space feel immersive and unstable. Audio input then disrupts this environment through glitch effects such as RGB splitting and screen tearing. These mechanics continuously influence the same canvas rather than existing as separate effects. Visually, the project is connected through organic floral forms, soft movement, and digital distortion aesthetics. Together, they create a surreal interactive space that changes according to the viewer’s interaction and surrounding sound.
