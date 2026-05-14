@@ -24,6 +24,11 @@ William Morris floral patterns
 
 Generative p5.js artworks
 
+
+---
+
+We are also influenced by glitch art and psychological thriller aesthetics, especially RGB splitting, chromatic aberration, and distorted digital imagery. Loud sounds from microphone input will destabilise the environment, causing the flowers and screen to tear and glitch.
+
 ---
 
 ![Image_3](Team_Doc/Inspiration_1.jpg)
@@ -32,11 +37,14 @@ Glitch art
 
 ---
 
-We are also influenced by glitch art and psychological thriller aesthetics, especially RGB splitting, chromatic aberration, and distorted digital imagery. Loud sounds from microphone input will destabilise the environment, causing the flowers and screen to tear and glitch.
-
-
-
 In addition, we are inspired by optical illusion artworks and naked-eye 3D effects. Mouse movement will create layered parallax motion, making flowers at different depths move at different speeds to create the illusion of three-dimensional space.
+
+---
+
+![Image_4](Team_Doc/naked_3d.jpg)
+![Image_4.5](Team_Doc/naked_3d2.jpg)
+
+---
 
 Together, these mechanics create a surreal digital environment that constantly evolves and reacts to the viewer.
 
@@ -60,13 +68,13 @@ This mechanic focuses on building the generative flower system that forms the fo
 
 The user does not directly control this mechanic. Instead, the system behaves like a living digital environment that evolves on its own over time. This connects closely to our project vision of creating an unstable and immersive digital garden. The procedural growth of the flowers provides the calm visual foundation of the piece, which can later become distorted by audio glitches and spatial perception effects caused by user interaction.
 
-![Image_1](Team_Doc/p5js_flowers.png)
+![Image_5](Team_Doc/p5js_flowers.png)
 
 Generative Art
 
 ---
 
-![Image_2](Team_Doc/data_structure_garden_gif_Bo9uhkxz_Z1GBsW2.gif)
+![Image_6](Team_Doc/data_structure_garden_gif_Bo9uhkxz_Z1GBsW2.gif)
 
 Data Structure Garden
 
@@ -87,7 +95,7 @@ User input provides users with a channel to interact with our work, allowing the
 
 3D parallax is essentially achieved by utilizing differences in movement speed. As shown in the image below, by reading the movement of the mouse, we can control the movement speed of the images before and after, creating a 3D illusion for our eyes, allowing us to perceive a 3D space that does not actually exist.
 
-![Image_4](Team_Doc/3d_parallax.gif)
+![Image_7](Team_Doc/3d_parallax.gif)
 
 ---
 
