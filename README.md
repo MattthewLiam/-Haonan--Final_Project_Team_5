@@ -44,6 +44,8 @@ In addition, we are inspired by optical illusion artworks and naked-eye 3D effec
 ![Image_4](Team_Doc/naked_3d.jpg)
 ![Image_4.5](Team_Doc/naked_3d2.jpg)
 
+Naked-eye 3D
+
 ---
 
 Together, these mechanics create a surreal digital environment that constantly evolves and reacts to the viewer.
