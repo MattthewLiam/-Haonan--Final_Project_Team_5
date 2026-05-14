@@ -10,7 +10,7 @@ Our team has chosen to create an **original piece**.
 
 ### Project Vision
 
-Our project explores how a digital environment can gradually become unstable through interaction, sound, and perception. We aim to create an interactive “digital garden” where abstract flowers continuously grow and drift across the canvas using randomness and Perlin noise, inspired by William Morris floral patterns and generative p5.js artworks.
+Our project explores how a digital environment can gradually become unstable through interaction, sound, and perception, which can provide viewers with a visually stunning experience. We aim to create an interactive “digital garden” where abstract flowers continuously grow and drift across the canvas using randomness and Perlin noise, inspired by William Morris floral patterns and generative p5.js artworks.
 
 ---
 
@@ -44,7 +44,7 @@ Together, these mechanics create a surreal digital environment that constantly e
 |---|---|
 | Xuelin Ma, xuma0701 | Perlin Noise & Randomness |
 | Name | Audio |
-| Name | User input |
+| Weixi Qian, wqia9153 | User input |
 
 ---
 
@@ -71,6 +71,12 @@ Data Structure Garden
 ---
 
 ## User Input Mechanic
+
+User input provides users with a channel to interact with our work, allowing them to further experience our work. Besides, user input is also one of the keys to achieving 3D parallax. Truly good 3D parallax is not about something moving, but about the user feeling that their perspective is changing, and user input can act as the steering wheel for the user to control their perspective. By translating user input into changes in perspective and then making elements at different depths move to varying degrees, we can create a sense of three-dimensional space.
+
+3D parallax is essentially achieved by utilizing differences in movement speed. As shown in the image below, by reading the movement of the mouse, we can control the movement speed of the images before and after, creating a 3D illusion for our eyes, allowing us to perceive a 3D space that does not actually exist.
+
+![Image_3](Team_Doc/3d_parallax.gif)
 
 ---
 
