@@ -1,3 +1,9 @@
+// --------------------------------------------------
+// Generative Flower System with Perlin Noise
+// This section creates random flowers that bloom, float with Perlin noise,
+// stay briefly, then shrink and fade away.
+// --------------------------------------------------
+
 let flowers = [];
 
 function setup() {
@@ -16,7 +22,7 @@ function draw() {
   background(5, 8, 15, 35);
 
   // Generate a new flower every 55 frames, while limiting the maximum number of flowers on screen
-  if (frameCount % 55 === 0 && flowers.length < 25) {
+  if (frameCount % 5 === 0 && flowers.length < 100) {
     flowers.push(new Flower());
   }
 
@@ -48,7 +54,7 @@ class Flower {
     this.size = random(45, 95);
 
     // Random number of petals
-    this.petalCount = floor(random(7, 15));
+    this.petalCount = floor(random(3, 24));
 
     // Random initial rotation angle
     this.rotation = random(TWO_PI);
@@ -57,9 +63,9 @@ class Flower {
     this.age = 0;
 
     // Duration of fade in, visible state, and fade out
-    this.fadeInTime = random(90, 140);
-    this.stayTime = random(180, 300);
-    this.fadeOutTime = random(100, 160);
+    this.fadeInTime = random(45, 75);
+    this.stayTime = random(300, 500);
+    this.fadeOutTime = random(50, 90);
 
     // Total lifespan of the flower
     this.totalLife =
@@ -311,3 +317,254 @@ function windowResized() {
   // Automatically resize the canvas when the browser window changes size
   resizeCanvas(windowWidth, windowHeight);
 }
+
+// --------------------------------------------------
+// Mouse wheel depth / parallax extension
+// This section adds a fake 3D depth effect without changing the original flower code.
+// --------------------------------------------------
+
+// This value works like a virtual camera depth.
+// Scrolling up increases it, making flowers move outward from the centre.
+// Scrolling down decreases it, making flowers move back toward the centre.
+let cameraDepth = 0;
+
+// Save the original Flower update function
+const originalFlowerUpdate = Flower.prototype.update;
+
+// Extend the original update function
+Flower.prototype.update = function () {
+
+  // Run the original Perlin noise floating movement first
+  originalFlowerUpdate.call(this);
+
+  // Give each flower a random movement speed if it does not already have one
+  // This speed is independent from its distance to the centre
+  if (this.depthSpeed === undefined) {
+    this.depthSpeed = random(80, 360);
+  }
+
+  // Direction from the centre of the canvas to the flower's base position
+  let dirX = this.baseX - width / 2;
+  let dirY = this.baseY - height / 2;
+
+  // Convert the direction into a unit vector
+  // This keeps only the direction, not the distance
+  let distanceFromCentre = sqrt(dirX * dirX + dirY * dirY);
+
+  if (distanceFromCentre > 0) {
+    dirX = dirX / distanceFromCentre;
+    dirY = dirY / distanceFromCentre;
+  }
+
+  // Move flowers outward from the centre
+  // The movement amount is controlled by cameraDepth and each flower's random speed
+  let depthMoveX = dirX * cameraDepth * this.depthSpeed;
+  let depthMoveY = dirY * cameraDepth * this.depthSpeed;
+
+  // Add the depth movement on top of the original flower position
+  this.x += depthMoveX;
+  this.y += depthMoveY;
+};
+
+// Save the original Flower display function
+const originalFlowerDisplay = Flower.prototype.display;
+
+// Extend the original display function
+Flower.prototype.display = function () {
+
+  if (this.depth === undefined) {
+    this.depth = random(0.3, 1.8);
+  }
+
+  // Save the original size
+  let originalSize = this.size;
+
+  // Scale flowers slightly based on depth
+  // This makes closer flowers appear larger and enhances the fake 3D effect
+  let depthScale = constrain(
+    1 + cameraDepth * this.depth * 0.35,
+    0.5,
+    2.2
+  );
+
+  this.size = originalSize * depthScale;
+
+  // Run the original display function
+  originalFlowerDisplay.call(this);
+
+  // Restore the original size so the flower does not permanently grow
+  this.size = originalSize;
+};
+
+// Mouse wheel interaction
+function mouseWheel(event) {
+
+  // In most browsers, scrolling up gives a negative delta.
+  // Multiplying by -1 makes scrolling up push flowers outward.
+  cameraDepth += event.delta * -0.0015;
+
+  // Limit the depth range so the movement does not become uncontrollable
+  cameraDepth = constrain(cameraDepth, 0, 1.4);
+
+  // Prevent the page from scrolling while interacting with the canvas
+  return false;
+}
+
+// --------------------------------------------------
+// Audio Glitch Extension
+// This section uses microphone input to disturb the digital garden.
+// Louder sound creates stronger screen tearing.
+// If the sound passes a threshold, the background turns blood red
+// and the flowers become white.
+// --------------------------------------------------
+
+// Microphone input
+let audioMic;
+let audioStarted = false;
+
+// Smoothed audio level for more stable visual changes
+let smoothAudioLevel = 0;
+
+// Current glitch strength
+let audioGlitchAmount = 0;
+
+// When this becomes true, the garden enters a corrupted state
+let dangerMode = false;
+
+// You can adjust this value.
+// Lower value = easier to trigger the red background and white flowers.
+let dangerThreshold = 0.18;
+
+// Save the current setup function
+const originalSetupWithAudio = setup;
+
+setup = function () {
+
+  // Run the original setup first
+  originalSetupWithAudio();
+
+  // Create microphone input
+  audioMic = new p5.AudioIn();
+
+  // Add a button to enable microphone
+  let micButton = createButton("Enable Microphone");
+  micButton.position(20, 20);
+
+  micButton.mousePressed(function () {
+    userStartAudio();
+    audioMic.start();
+    audioStarted = true;
+    micButton.hide();
+  });
+};
+
+// Save the current draw function
+const originalDrawWithAudio = draw;
+
+draw = function () {
+
+  // Update microphone level before drawing the garden
+  updateAudioGlitch();
+
+  // If the sound is too loud, create a blood-red background state
+  // This happens before the original draw, so flowers are still drawn above it
+  if (dangerMode) {
+    background(255, 0, 0, 180);
+  }
+
+  // Run the original draw function
+  originalDrawWithAudio();
+
+  // Apply screen tearing after the garden is drawn
+  applyAudioTearing();
+};
+
+// Update audio level and glitch state
+function updateAudioGlitch() {
+
+  if (audioStarted) {
+
+    // Get current microphone volume
+    let level = audioMic.getLevel();
+
+    // Smooth the level so the effect does not jump too sharply
+    smoothAudioLevel = lerp(smoothAudioLevel, level, 0.15);
+
+  } else {
+
+    smoothAudioLevel = 0;
+  }
+
+  // Convert microphone volume to glitch strength
+  audioGlitchAmount = map(
+    smoothAudioLevel,
+    0,
+    0.3,
+    0,
+    55,
+    true
+  );
+
+  // Enter danger mode when the audio level passes the threshold
+  dangerMode = smoothAudioLevel > dangerThreshold;
+}
+
+// Apply screen tearing based on microphone volume
+function applyAudioTearing() {
+
+  if (audioGlitchAmount < 3) {
+    return;
+  }
+
+  // The louder the sound, the more tearing lines appear
+  let tearCount = floor(audioGlitchAmount * 0.5);
+
+  for (let i = 0; i < tearCount; i++) {
+
+    let y = random(height);
+    let h = random(3, 20);
+
+    let shift = random(
+      -audioGlitchAmount * 2,
+      audioGlitchAmount * 2
+    );
+
+    // Copy a horizontal slice of the canvas and shift it sideways
+    copy(
+      0,
+      y,
+      width,
+      h,
+      shift,
+      y,
+      width,
+      h
+    );
+  }
+}
+
+// Save the current Flower display function
+const originalDisplayWithAudio = Flower.prototype.display;
+
+Flower.prototype.display = function () {
+
+  // If danger mode is active, temporarily turn the flower white
+  if (dangerMode) {
+
+    let originalPetalColor = this.petalColor;
+    let originalCenterColor = this.centerColor;
+
+    this.petalColor = color(255);
+    this.centerColor = color(255);
+
+    originalDisplayWithAudio.call(this);
+
+    this.petalColor = originalPetalColor;
+    this.centerColor = originalCenterColor;
+
+  } else {
+
+    // Otherwise, display flowers normally
+    originalDisplayWithAudio.call(this);
+  }
+};
