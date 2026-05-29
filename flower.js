@@ -22,7 +22,7 @@ function draw() {
   background(5, 8, 15, 35);
 
   // Generate a new flower every 55 frames, while limiting the maximum number of flowers on screen
-  if (frameCount % 10 === 0 && flowers.length < 100) {
+  if (frameCount % 5 === 0 && flowers.length < 100) {
     flowers.push(new Flower());
   }
 
