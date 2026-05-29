@@ -70,6 +70,31 @@ Flower.prototype.display = function () {
 
     this.petalColor = originalPetalColor;
     this.centerColor = originalCenterColor;
+
+    push();
+    translate(this.x, this.y);
+    let noiseRotation = map(noise(this.noiseSeedR + frameCount * 0.003), 0, 1, -0.18, 0.18);
+    rotate(this.rotation + noiseRotation);
+
+    blendMode(DIFFERENCE);
+    fill(255);
+    noStroke();
+    
+    let fs = this.size; 
+    
+    ellipse(-fs * 0.12, -fs * 0.05, fs * 0.05, fs * 0.15);
+    ellipse(fs * 0.15, -fs * 0.03, fs * 0.04, fs * 0.12);
+    
+    stroke(255);
+    strokeWeight(fs * 0.02);
+    noFill();
+    beginShape();
+    vertex(-fs * 0.25, fs * 0.1);
+    bezierVertex(-fs * 0.1, fs * 0.25, fs * 0.1, fs * 0.25, fs * 0.25, fs * 0.05);
+    endShape();
+    
+    pop();
+
   } else {
     originalDisplayWithAudio.call(this);
   }

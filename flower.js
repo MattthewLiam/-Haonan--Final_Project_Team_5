@@ -1,8 +1,3 @@
-// --------------------------------------------------
-// flower.js (Owned by: Xuelin Ma - Perlin Noise & Randomness)
-// 包含 Flower 类和缓动函数，纯净的生成艺术逻辑
-// --------------------------------------------------
-
 class Flower {
   constructor() {
     this.baseX = random(width);
@@ -11,16 +6,13 @@ class Flower {
     this.petalCount = floor(random(3, 24));
     this.rotation = random(TWO_PI);
     this.age = 0;
-    
     this.fadeInTime = random(45, 75);
     this.stayTime = random(300, 500);
     this.fadeOutTime = random(50, 90);
     this.totalLife = this.fadeInTime + this.stayTime + this.fadeOutTime;
-
     this.noiseSeedX = random(1000);
     this.noiseSeedY = random(1000);
     this.noiseSeedR = random(1000);
-
     this.petalColor = color(random(255), random(255), random(255));
     this.centerColor = color(random(255), random(255), random(255));
   }
@@ -56,16 +48,13 @@ class Flower {
   display() {
     let progress = this.getProgress();
     let alpha = this.getAlpha();
-
     let petalProgress = constrain(map(progress, 0.18, 1, 0, 1), 0, 1);
     petalProgress = easeInOutCubic(petalProgress);
-
     let centerProgress = constrain(map(progress, 0, 0.25, 0, 1), 0, 1);
     centerProgress = easeOutCubic(centerProgress);
 
     push();
     translate(this.x, this.y);
-
     let noiseRotation = map(noise(this.noiseSeedR + frameCount * 0.003), 0, 1, -0.18, 0.18);
     rotate(this.rotation + noiseRotation);
     noStroke();
@@ -91,10 +80,10 @@ class Flower {
   }
 }
 
-// 缓动函数
 function easeInOutCubic(t) {
   return t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2;
 }
+
 function easeOutCubic(t) {
   return 1 - pow(1 - t, 3);
 }
