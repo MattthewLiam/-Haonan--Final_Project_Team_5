@@ -1,61 +1,42 @@
-let cameraDepth = 0;
-let mouseX = 0;
-let mouseY = 0;
-let mouseInfluence = 120;
-let pushStrength = 0.002;
+let inputForceRadius = 180;
+let inputMaxForce = 22;   
+let inputRotationForce = 0.12;
 
-const originalFlowerUpdate = Flower.prototype.update;
+function initInputSystem() {
 
-function mouseMoved() {
-  mouseX = mouseX || mouseX;
-  mouseY = mouseY || mouseY;
 }
 
-Flower.prototype.update = function () {
-  originalFlowerUpdate.call(this);
-  if (this.depthSpeed === undefined) {
-    this.depthSpeed = random(80, 360);
-  }
-  let dirX = this.baseX - width / 2;
-  let dirY = this.baseY - height / 2;
-  let distanceFromCentre = sqrt(dirX * dirX + dirY * dirY);
-  if (distanceFromCentre > 0) {
-    dirX = dirX / distanceFromCentre;
-    dirY = dirY / distanceFromCentre;
-  }
-  let depthMoveX = dirX * cameraDepth * this.depthSpeed;
-  let depthMoveY = dirY * cameraDepth * this.depthSpeed;
-  this.x += depthMoveX;
-  this.y += depthMoveY;
+function updateInputSystem() {
+  applyMouseForcesToFlowers();
+}
 
-  if (mouseX && mouseY) {
-    let dx = this.x - mouseX;
-    let dy = this.y - mouseY;
-    let dist = sqrt(dx * dx + dy * dy);
+function applyMouseForcesToFlowers() {
+  if (!flowers || flowers.length === 0) return;
 
-    if (dist < mouseInfluence) {
-      let force = (1 - dist / mouseInfluence) * pushStrength;
-      this.x += dx * force * 50;
-      this.y += dy * force * 50;
+  for (let f of flowers) {
+    let dx = f.displayX - mouseX;
+    let dy = f.displayY - mouseY;
+    let distToMouse = sqrt(dx * dx + dy * dy);
+
+    if (distToMouse < inputForceRadius) {
+      let force = map(distToMouse, 0, inputForceRadius, inputMaxForce, 0);
+
+      let ux = dx / distToMouse;
+      let uy = dy / distToMouse;
+
+      f.displayX += ux * force;
+      f.displayY += uy * force;
+
+      if (f.rotation !== undefined) {
+        let rotPush = map(distToMouse, 0, inputForceRadius, inputRotationForce, 0);
+        f.rotation += random(-rotPush, rotPush);
+      }
     }
+
+    let restoreX = (f.x - f.displayX) * 0.03;
+    let restoreY = (f.y - f.displayY) * 0.03;
+
+    f.displayX += restoreX;
+    f.displayY += restoreY;
   }
-};
-
-const originalFlowerDisplay = Flower.prototype.display;
-
-Flower.prototype.display = function () {
-  if (this.depth === undefined) {
-    this.depth = random(0.3, 1.8);
-  }
-  let originalSize = this.size;
-  let depthScale = constrain(1 + cameraDepth * this.depth * 0.35, 0.5, 2.2);
-  this.size = originalSize * depthScale;
-  originalFlowerDisplay.call(this);
-  this.size = originalSize;
-};
-
-function mouseWheel(event) {
-  cameraDepth += event.delta * -0.0015;
-  cameraDepth = constrain(cameraDepth, 0, 1.4);
-  return false;
 }
