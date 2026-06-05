@@ -1,5 +1,14 @@
 let cameraDepth = 0;
+let mouseX = 0;
+let mouseY = 0;
+let mouseInfluence = 120;
+let pushStrength = 0.002;
 const originalFlowerUpdate = Flower.prototype.update;
+
+function mouseMoved() {
+  mouseX = mouseX || mouseX;
+  mouseY = mouseY || mouseY;
+}
 
 Flower.prototype.update = function () {
   originalFlowerUpdate.call(this);
