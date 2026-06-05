@@ -6,6 +6,7 @@ let camOffsetY = 0;
 let isDragging = false;
 let lastMouseX = 0;
 let lastMouseY = 0;
+let lastScale = 1;
 
 function initInputSystem() {
 
@@ -14,6 +15,7 @@ function initInputSystem() {
 function updateInputSystem() {
   applyMouseForcesToFlowers();
   handleCameraDrag();
+  applyZoomParallax(); 
 }
 
 function applyMouseForcesToFlowers() {
@@ -110,5 +112,24 @@ function handleCameraDrag() {
     camOffsetY += dy;
 
     clampCamera();
+  }
+}
+
+function applyZoomParallax() {
+  if (!flowers || flowers.length === 0) return;
+
+  let scaleDelta = gardenScale - lastScale;
+  lastScale = gardenScale;
+
+  if (abs(scaleDelta) < 0.0001) return;
+
+  for (let f of flowers) {
+
+    let depthFactor = map(f.size, 30, 200, 2.5, 0.2);
+
+    let parallax = scaleDelta * 200 * depthFactor;
+
+    f.x += (f.x - width / 2) * parallax * 0.002;
+    f.y += (f.y - height / 2) * parallax * 0.002;
   }
 }
