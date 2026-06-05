@@ -6,6 +6,10 @@ let camOffsetY = 0;
 let isDragging = false;
 let lastMouseX = 0;
 let lastMouseY = 0;
+let camMinX = -windowWidth * 0.5;
+let camMaxX = windowWidth * 0.5;
+let camMinY = -windowHeight * 0.5;
+let camMaxY = windowHeight * 0.5;
 
 function initInputSystem() {
 
@@ -97,5 +101,8 @@ function handleCameraDrag() {
 
     camOffsetX += dx;
     camOffsetY += dy;
+
+    camOffsetX = constrain(camOffsetX, camMinX, camMaxX);
+    camOffsetY = constrain(camOffsetY, camMinY, camMaxY);
   }
 }
