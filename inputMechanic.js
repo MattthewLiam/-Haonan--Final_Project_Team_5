@@ -1,6 +1,6 @@
-let inputForceRadius = 180;
-let inputMaxForce = 22;   
-let inputRotationForce = 0.12;
+let inputForceRadius = 200;
+let inputMaxForce = 30;   
+let inputRotationForce = 0.15;
 
 function initInputSystem() {
 
