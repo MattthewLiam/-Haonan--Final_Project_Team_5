@@ -6,10 +6,6 @@ let camOffsetY = 0;
 let isDragging = false;
 let lastMouseX = 0;
 let lastMouseY = 0;
-let camMinX = -windowWidth * 0.5;
-let camMaxX = windowWidth * 0.5;
-let camMinY = -windowHeight * 0.5;
-let camMaxY = windowHeight * 0.5;
 
 function initInputSystem() {
 
@@ -94,6 +90,17 @@ function mouseDragged() {
   }
 }
 
+function clampCamera() {
+  let scaledW = width * gardenScale;
+  let scaledH = height * gardenScale;
+
+  let limitX = (scaledW - width) / 2;
+  let limitY = (scaledH - height) / 2;
+
+  camOffsetX = constrain(camOffsetX, -limitX, limitX);
+  camOffsetY = constrain(camOffsetY, -limitY, limitY);
+}
+
 function handleCameraDrag() {
   if (mouseIsPressed && mouseButton === LEFT) {
     let dx = mouseX - pmouseX;
@@ -102,7 +109,6 @@ function handleCameraDrag() {
     camOffsetX += dx;
     camOffsetY += dy;
 
-    camOffsetX = constrain(camOffsetX, camMinX, camMaxX);
-    camOffsetY = constrain(camOffsetY, camMinY, camMaxY);
+    clampCamera();
   }
 }
