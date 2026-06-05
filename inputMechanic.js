@@ -3,6 +3,7 @@ let mouseX = 0;
 let mouseY = 0;
 let mouseInfluence = 120;
 let pushStrength = 0.002;
+
 const originalFlowerUpdate = Flower.prototype.update;
 
 function mouseMoved() {
@@ -26,6 +27,18 @@ Flower.prototype.update = function () {
   let depthMoveY = dirY * cameraDepth * this.depthSpeed;
   this.x += depthMoveX;
   this.y += depthMoveY;
+
+  if (mouseX && mouseY) {
+    let dx = this.x - mouseX;
+    let dy = this.y - mouseY;
+    let dist = sqrt(dx * dx + dy * dy);
+
+    if (dist < mouseInfluence) {
+      let force = (1 - dist / mouseInfluence) * pushStrength;
+      this.x += dx * force * 50;
+      this.y += dy * force * 50;
+    }
+  }
 };
 
 const originalFlowerDisplay = Flower.prototype.display;
