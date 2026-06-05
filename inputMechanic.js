@@ -1,6 +1,11 @@
 let inputForceRadius = 150;
 let inputMaxForce = 50;
 let inputRotationForce = 0.15;
+let camOffsetX = 0;
+let camOffsetY = 0;
+let isDragging = false;
+let lastMouseX = 0;
+let lastMouseY = 0;
 
 function initInputSystem() {
 
@@ -8,6 +13,7 @@ function initInputSystem() {
 
 function updateInputSystem() {
   applyMouseForcesToFlowers();
+  handleCameraDrag();
 }
 
 function applyMouseForcesToFlowers() {
@@ -55,4 +61,41 @@ function mouseWheel(event) {
   gardenScale = constrain(gardenScale, minScale, maxScale);
 
   return false;
+}
+
+function mousePressed() {
+  if (mouseButton === LEFT) {
+    isDragging = true;
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === LEFT) {
+    isDragging = false;
+  }
+}
+
+function mouseDragged() {
+  if (isDragging) {
+    let dx = mouseX - lastMouseX;
+    let dy = mouseY - lastMouseY;
+
+    camOffsetX += dx;
+    camOffsetY += dy;
+
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+  }
+}
+
+function handleCameraDrag() {
+  if (mouseIsPressed && mouseButton === LEFT) {
+    let dx = mouseX - pmouseX;
+    let dy = mouseY - pmouseY;
+
+    camOffsetX += dx;
+    camOffsetY += dy;
+  }
 }

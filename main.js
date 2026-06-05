@@ -13,6 +13,7 @@ function draw() {
   background(0, 160, 210);
 
   push();
+  translate(camOffsetX, camOffsetY);
   translate(width / 2, height / 2);
   scale(gardenScale);
   translate(-width / 2, -height / 2);
@@ -22,7 +23,7 @@ function draw() {
   // Later, teammates can add:
   
   // updateAudioSystem();
-
+  pop();
 }
 
 function windowResized() {
