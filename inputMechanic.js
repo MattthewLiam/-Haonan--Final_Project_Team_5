@@ -45,7 +45,7 @@ function applyMouseForcesToFlowers() {
 
 let gardenScale = 1;
 let zoomSpeed = 0.0015;
-let minScale = 0.4;
+let minScale = 1;
 let maxScale = 2.5;
 
 function mouseWheel(event) {
