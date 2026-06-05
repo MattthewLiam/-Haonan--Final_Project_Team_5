@@ -1,5 +1,5 @@
-let inputForceRadius = 200;
-let inputMaxForce = 28;   
+let inputForceRadius = 150;
+let inputMaxForce = 50;
 let inputRotationForce = 0.15;
 
 function initInputSystem() {
@@ -41,4 +41,18 @@ function applyMouseForcesToFlowers() {
     f.displayY += f.offsetY;
 
   }
+}
+
+let gardenScale = 1;
+let zoomSpeed = 0.0015;
+let minScale = 0.4;
+let maxScale = 2.5;
+
+function mouseWheel(event) {
+
+  gardenScale -= event.delta * zoomSpeed;
+
+  gardenScale = constrain(gardenScale, minScale, maxScale);
+
+  return false;
 }
