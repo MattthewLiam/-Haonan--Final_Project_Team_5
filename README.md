@@ -58,15 +58,15 @@ Together, these mechanics create a surreal digital environment that constantly e
 
 | Team Member | Mechanic |
 |---|---|
-| Xuelin Ma, xuma0701 | Perlin Noise & Randomness |
+| Xuelin Ma, xuma0701 | Perlin Noise & Randomness & Time-based |
 | Yanhan Wei, ywei0292 | Audio |
 | Weixi Qian, wqia9153 | User input |
 
 ---
 
-## Perlin Noise and Randomness Mechanic
+## Perlin Noise and Randomness and Time-based Mechanic
 
-This mechanic focuses on building the generative flower system that forms the foundation of the project. Using Perlin noise and random values, abstract flowers will continuously grow, drift, and change across the canvas instead of remaining static. Randomness will control variations such as flower size, colour, position, petal count, and movement, making every generated composition slightly different. Perlin noise will be used to create smoother and more organic motion, allowing the flowers to move in a way that feels natural and alive rather than completely chaotic.
+This mechanic focuses on building the generative flower system that forms the foundation of the project. Using Perlin noise and random and Time-based values, three types of abstract flowers will continuously grow, drift, and change across the canvas instead of remaining static. Randomness will control variations such as flower size, position, and movement, making every generated composition slightly different. Perlin noise will be used to create smoother and more organic motion, allowing the flowers to move in a way that feels natural and alive rather than completely chaotic. Time-based mechanics will be used to control each flower's appearance, duration, and disappearance.
 
 The user does not directly control this mechanic. Instead, the system behaves like a living digital environment that evolves on its own over time. This connects closely to our project vision of creating an unstable and immersive digital garden. The procedural growth of the flowers provides the calm visual foundation of the piece, which can later become distorted by audio glitches and spatial perception effects caused by user interaction.
 
@@ -104,3 +104,19 @@ User input provides users with a channel to interact with our work, allowing the
 # Part 3: Putting It Together
 
 All mechanics exist within the same evolving digital garden. The generative flower system creates the main visual environment, while mouse interaction introduces layered parallax movement and depth illusion, making the space feel immersive and unstable. Audio input then disrupts this environment through glitch effects such as RGB splitting and screen tearing. These mechanics continuously influence the same canvas rather than existing as separate effects. Visually, the project is connected through organic floral forms, soft movement, and digital distortion aesthetics. Together, they create a surreal interactive space that changes according to the viewer’s interaction and surrounding sound.
+
+---
+
+# Part 4: AI acknowledgement
+
+Generative AI tools (ChatGPT) were used during the development of this project to assist with code generation, debugging, and technical problem-solving.
+
+The overall project concept, visual direction, flower designs, interaction logic, parameter adjustments, testing, and final implementation decisions were developed and refined by the authors. All AI-generated code was reviewed, modified, and integrated into the final project by the team.
+
+# Part 5: External references
+
+Flower 1 was inspired by a Pinterest reference: https://au.pinterest.com/pin/1152358623431005277/
+
+Flower 2 was inspired by a Pinterest reference: https://au.pinterest.com/pin/1152358623431005270/
+
+Flower 3 was inspired by a Pinterest reference: https://au.pinterest.com/pin/1152358623431072655/

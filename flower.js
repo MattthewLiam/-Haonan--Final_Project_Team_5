@@ -43,6 +43,7 @@ function updateFlowerSystem() {
   }
 }
 
+// This code was generated with the help of ChatGPT and
 // Randomly choose one flower type and create it
 function spawnRandomFlower() {
   let FlowerClass = random(flowerTypes);
@@ -93,6 +94,7 @@ class Flower1 {
   update() {
     this.age++;
 
+    // This code was generated with the help of ChatGPT and using
     // Perlin noise creates subtle floating movement around the original position
     let driftX = map(
       noise(this.noiseSeedX + frameCount * 0.004),
@@ -267,6 +269,7 @@ class Flower2 {
   update() {
     this.age++;
 
+    // This code was generated with the help of ChatGPT and create
     // Smooth floating movement using Perlin noise
     let driftX = map(
       noise(this.noiseSeedX + frameCount * 0.003),
@@ -652,6 +655,7 @@ getProgress() {
 }
 
 // --------------------------------------------------
+// This code was generated with the help of ChatGPT
 // Helper function for Flower3
 // Draws one gradient triangle whose pivot point is
 // the centre vertex at (0, 0)
