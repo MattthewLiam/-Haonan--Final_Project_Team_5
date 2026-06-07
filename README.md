@@ -1,4 +1,4 @@
-# Quiz 9 – Final Project Pitch
+# Final Project
 
 ## Part 1: Project Direction
 
@@ -70,15 +70,9 @@ This mechanic focuses on building the generative flower system that forms the fo
 
 The user does not directly control this mechanic. Instead, the system behaves like a living digital environment that evolves on its own over time. This connects closely to our project vision of creating an unstable and immersive digital garden. The procedural growth of the flowers provides the calm visual foundation of the piece, which can later become distorted by audio glitches and spatial perception effects caused by user interaction.
 
-![Image_5](Team_Doc/p5js_flowers.png)
+![FlowerPart](Team_Doc/flower_gif.gif)
+*(Flower Generation Demonstration)*
 
-Generative Art
-
----
-
-![Image_6](Team_Doc/data_structure_garden_gif_Bo9uhkxz_Z1GBsW2.gif)
-
-Data Structure Garden
 
 ---
 
