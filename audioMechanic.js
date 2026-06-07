@@ -176,10 +176,11 @@ function applyAudioTearing() {
   blendMode(BLEND); 
   noTint();
 
-  let tearCount = floor(audioGlitchAmount * 0.8);
+  let tearCount = min(floor(audioGlitchAmount * 0.8), 25); 
+  
   for (let i = 0; i < tearCount; i++) {
     let y = random(height);
-    let h = random(5, 30); 
+    let h = random(10, 50); 
     let shift = random(-audioGlitchAmount * 2.5, audioGlitchAmount * 2.5); 
     copy(0, y, width, h, shift, y, width, h);
   }
@@ -202,7 +203,7 @@ function applyAudioTearing() {
   }
 
   noStroke();
-  let noiseCount = audioGlitchAmount * 15;
+  let noiseCount = min(audioGlitchAmount * 15, 300);
   for (let i = 0; i < noiseCount; i++) {
     fill(255, random(50, 150)); 
     rect(random(width), random(height), random(2, 8), random(1, 3));
