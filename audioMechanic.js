@@ -60,47 +60,98 @@ function updateAudioGlitch() {
   }
 }
 
-const originalDisplayWithAudio = Flower.prototype.display;
+function drawCreepyFace(fs) {
+  blendMode(DIFFERENCE);
+  fill(255);
+  noStroke();
+  ellipse(-fs * 0.12, -fs * 0.05, fs * 0.05, fs * 0.15);
+  ellipse(fs * 0.15, -fs * 0.03, fs * 0.04, fs * 0.12);
+  stroke(255);
+  strokeWeight(max(2, fs * 0.025)); // 优化保留：保底 2 像素粗细
+  noFill();
+  beginShape();
+  vertex(-fs * 0.25, fs * 0.1);
+  bezierVertex(-fs * 0.1, fs * 0.25, fs * 0.1, fs * 0.25, fs * 0.25, fs * 0.05);
+  endShape();
+}
 
-Flower.prototype.display = function () {
+const originalDisplayF1 = Flower1.prototype.display;
+Flower1.prototype.display = function () {
   if (dangerMode) {
-    let originalPetalColor = this.petalColor;
-    let originalCenterColor = this.centerColor;
-
-    this.petalColor = color(255, 255, 255, 200);
-    this.centerColor = color(255, 255, 255, 200);
-
-    originalDisplayWithAudio.call(this);
-
-    this.petalColor = originalPetalColor;
-    this.centerColor = originalCenterColor;
+    let origColor = this.flowerColor;
+    this.flowerColor = color(255, 255, 255, 200);
+    originalDisplayF1.call(this);
+    this.flowerColor = origColor;
 
     push();
-    translate(this.x, this.y);
-    let noiseRotation = map(noise(this.noiseSeedR + frameCount * 0.003), 0, 1, -0.18, 0.18);
-    rotate(this.rotation + noiseRotation);
-
-    blendMode(DIFFERENCE);
-    fill(255);
-    noStroke();
-    
-    let fs = this.size; 
-    
-    ellipse(-fs * 0.12, -fs * 0.05, fs * 0.05, fs * 0.15);
-    ellipse(fs * 0.15, -fs * 0.03, fs * 0.04, fs * 0.12);
-    
-    stroke(255);
-    strokeWeight(max(2, fs * 0.025));
-    noFill();
-    beginShape();
-    vertex(-fs * 0.25, fs * 0.1);
-    bezierVertex(-fs * 0.1, fs * 0.25, fs * 0.1, fs * 0.25, fs * 0.25, fs * 0.05);
-    endShape();
-    
+    translate(this.displayX, this.displayY); // 注意：队友的新代码用了 displayX/Y
+    drawCreepyFace(this.size);
     pop();
-
   } else {
-    originalDisplayWithAudio.call(this);
+    originalDisplayF1.call(this);
+  }
+};
+
+const originalDisplayF2 = Flower2.prototype.display;
+Flower2.prototype.display = function () {
+  if (dangerMode) {
+    let op = this.petalColor;
+    let os = this.stamenColor;
+    let opi = this.pistilColor;
+    
+    this.petalColor = color(255, 255, 255, 200);
+    this.stamenColor = color(255, 255, 255, 200);
+    this.pistilColor = color(255, 255, 255, 200);
+    
+    originalDisplayF2.call(this);
+    
+    this.petalColor = op;
+    this.stamenColor = os;
+    this.pistilColor = opi;
+
+    push();
+    translate(this.displayX, this.displayY);
+    let noiseRotation = map(noise(this.noiseSeedR + frameCount * 0.003), 0, 1, -0.12, 0.12);
+    rotate(this.rotation + noiseRotation);
+    drawCreepyFace(this.size);
+    pop();
+  } else {
+    originalDisplayF2.call(this);
+  }
+};
+
+const originalDisplayF3 = Flower3.prototype.display;
+Flower3.prototype.display = function () {
+  if (dangerMode) {
+    originalDisplayF3.call(this);
+    push();
+    translate(this.displayX, this.displayY);
+    let noiseRotation = map(noise(this.noiseSeedR + frameCount * 0.003), 0, 1, -0.12, 0.12);
+    rotate(this.rotation + noiseRotation);
+    drawCreepyFace(this.size);
+    pop();
+  } else {
+    originalDisplayF3.call(this);
+  }
+};
+
+const originalDrawFlower3GradientTriangle = drawFlower3GradientTriangle;
+drawFlower3GradientTriangle = function(triLength, triWidth, alpha) {
+  if (dangerMode) {
+    let ctx = drawingContext;
+    let leftW = triWidth * 0.35;
+    let rightW = triWidth * 0.75;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(-leftW, -triLength);
+    ctx.lineTo(rightW, -triLength);
+    ctx.closePath();
+    ctx.fillStyle = `rgba(255, 255, 255, ${alpha / 255})`; // 强制变为白色
+    ctx.fill();
+    ctx.restore();
+  } else {
+    originalDrawFlower3GradientTriangle(triLength, triWidth, alpha);
   }
 };
 
