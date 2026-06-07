@@ -43,7 +43,11 @@ draw = function () {
 function updateAudioGlitch() {
   if (audioStarted) {
     let level = audioMic.getLevel();
-    smoothAudioLevel = lerp(smoothAudioLevel, level, 0.15);
+    if (level > smoothAudioLevel) {
+      smoothAudioLevel = lerp(smoothAudioLevel, level, 0.6); 
+    } else {
+      smoothAudioLevel = lerp(smoothAudioLevel, level, 0.04); 
+    }
   } else {
     smoothAudioLevel = 0;
   }
@@ -86,7 +90,7 @@ Flower.prototype.display = function () {
     ellipse(fs * 0.15, -fs * 0.03, fs * 0.04, fs * 0.12);
     
     stroke(255);
-    strokeWeight(fs * 0.02);
+    strokeWeight(max(2, fs * 0.025));
     noFill();
     beginShape();
     vertex(-fs * 0.25, fs * 0.1);
@@ -109,10 +113,14 @@ function applyAudioTearing() {
   background(0); 
   blendMode(SCREEN); 
   
+  let maxOffset = width * 0.06; 
+  let offsetR = constrain(-audioGlitchAmount * 0.4, -maxOffset, maxOffset);
+  let offsetC = constrain(audioGlitchAmount * 0.4, -maxOffset, maxOffset);
+
   tint(255, 0, 0, 220); 
-  image(snap, -audioGlitchAmount * 0.4, 0);
+  image(snap, offsetR, 0);
   tint(0, 255, 255, 220); 
-  image(snap, audioGlitchAmount * 0.4, 0);
+  image(snap, offsetC, 0);
   
   blendMode(BLEND); 
   noTint();
@@ -129,12 +137,16 @@ function applyAudioTearing() {
     noStroke();
     let bloodDrops = floor(random(8, 20));
     for (let i = 0; i < bloodDrops; i++) {
-      fill(160, 0, 0, random(100, 255)); 
+      let alpha = random(120, 255);
+      fill(160, 0, 0, alpha); 
       let bx = random(width);
-      let by = random(-50, height);
-      let bw = random(2, 12);
+      let by = random(-50, height / 2); 
+      let bw = random(1, 4);            
       let bh = random(height / 3, height);
       rect(bx, by, bw, bh);
+      
+      fill(100, 0, 0, alpha + 50);
+      ellipse(bx + bw / 2, by + bh, bw * 1.8, bw * 3.5);
     }
   }
 
