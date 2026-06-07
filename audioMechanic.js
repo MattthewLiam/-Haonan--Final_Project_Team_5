@@ -3,7 +3,7 @@ let audioStarted = false;
 let smoothAudioLevel = 0;
 let audioGlitchAmount = 0;
 let dangerMode = false;
-let dangerThreshold = 0.1;
+let dangerThreshold = 0.15;
 
 const originalSetupWithAudio = setup;
 
@@ -52,11 +52,12 @@ function updateAudioGlitch() {
     smoothAudioLevel = 0;
   }
 
-  audioGlitchAmount = map(smoothAudioLevel, 0.05, 0.5, 0, 55, true);
   dangerMode = smoothAudioLevel > dangerThreshold;
   
-  if (dangerMode) {
-    audioGlitchAmount *= 2.5; 
+  if (!dangerMode) {
+    audioGlitchAmount = map(smoothAudioLevel, 0.02, dangerThreshold, 0, 15, true);
+  } else {
+    audioGlitchAmount = map(smoothAudioLevel, dangerThreshold, 0.5, 30, 80, true); 
   }
 }
 
