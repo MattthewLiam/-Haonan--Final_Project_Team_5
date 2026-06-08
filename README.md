@@ -120,6 +120,7 @@ The Audio mechanic serves as the chaotic and disruptive force within our interac
 When the environment is mostly quiet, the digital garden remains peaceful but unsettling. 
 
 ![Peaceful Garden](Team_Doc/Test_1.gif)
+
 *(Test 1: The base state of the garden with low ambient noise)*
 
 **Implementation:** In this state, the generative flowers bloom naturally. To maintain the analog horror aesthetic without disrupting the tranquility, the audio mechanic only applies a very faint CRT scanline overlay. This is achieved by drawing semi-transparent horizontal lines (`line()`) across the canvas, serving as a subtle reminder that the viewer is looking through an unstable digital monitor.
@@ -128,6 +129,7 @@ When the environment is mostly quiet, the digital garden remains peaceful but un
 When the user introduces a sudden sound—such as a shout, a clap, or blowing into the microphone—the volume crosses a specific threshold, snapping the environment into a corrupted nightmare state. 
 
 ![Distorted Garden](Team_Doc/Test_2.gif)
+
 *(Test 2: Audio spikes causing severe chromatic aberration and screen tearing)*
 
 **Implementation:** This violent visual breakdown is driven entirely by the audio volume (`audioGlitchAmount`). 
