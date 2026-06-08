@@ -4,7 +4,6 @@ function setup() {
 
   initFlowerSystem();
   initInputSystem();
-  // Later, teammates can add:
  
   // initAudioSystem();
 }
@@ -20,7 +19,6 @@ function draw() {
 
   updateFlowerSystem();
   updateInputSystem();
-  // Later, teammates can add:
   
   // updateAudioSystem();
   pop();

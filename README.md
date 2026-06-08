@@ -1,4 +1,9 @@
 # Final Project
+Xuelin Ma SID xuma0701
+
+Yanhan Wei SID ywei0292
+
+Weixi Qian SID wqia9153
 
 ## Part 1: Project Direction
 
@@ -10,7 +15,12 @@ Our team has chosen to create an **original piece**.
 
 ### Project Vision
 
-Our project explores how a digital environment can gradually become unstable through interaction, sound, and perception, which can provide viewers with a visually stunning experience. We aim to create an interactive “digital garden” where abstract flowers continuously grow and drift across the canvas using randomness and Perlin noise, inspired by William Morris floral patterns and generative p5.js artworks.
+Our project explores how a digital environment can gradually become unstable through interaction, sound, and perception, which can provide viewers with a visually stunning experience. We aim to create an interactive “digital garden” where abstract flowers continuously grow and drift across the canvas using randomness and Perlin noise, inspired by Animation もぺもぺ, William Morris floral patterns and generative p5.js artworks.
+
+---
+![Image_mopemope](Team_Doc/もぺもぺ.jpg)
+
+Animation もぺもぺ (mopemope)
 
 ---
 
@@ -93,6 +103,20 @@ User input provides users with a channel to interact with our work, allowing the
 
 ![Image_7](Team_Doc/3d_parallax.gif)
 
+Next, let me introduce the User input interaction I designed for our project.
+
+Firstly, users can use their mouse to push the flowers aside to freely explore our garden.
+
+![User_input_interaction1](Team_Doc/userinput1.gif)
+
+Next, users can zoom in and out using the mouse wheel. In this step, I used the 3D parallax technique I mentioned above to make the flowers at different distances move at different speeds, thus creating the illusion of moving forward in a 2D scene, just like moving through a flower bush.
+
+![User_input_interaction2](Team_Doc/userinput2.gif)
+
+Finally, I also added the function to freely move the view by holding down the left mouse button, making it easier for users to explore freely even after zooming in.
+
+![User_input_interaction3](Team_Doc/userinput3.gif)
+
 ---
 
 # Part 3: Putting It Together
@@ -114,3 +138,6 @@ Flower 1 was inspired by a Pinterest reference: https://au.pinterest.com/pin/115
 Flower 2 was inspired by a Pinterest reference: https://au.pinterest.com/pin/1152358623431005270/
 
 Flower 3 was inspired by a Pinterest reference: https://au.pinterest.com/pin/1152358623431072655/
+
+Mopemope animation:
+https://www.youtube.com/watch?v=nC-bVtpIMd4

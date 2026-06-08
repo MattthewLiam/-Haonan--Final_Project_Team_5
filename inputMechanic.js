@@ -56,6 +56,7 @@ let zoomSpeed = 0.0015;
 let minScale = 1;
 let maxScale = 2.5;
 
+// This part of the code was completed under the guidance of the generative AI Copilot, which corrected the error codes I wrote.
 function mouseWheel(event) {
 
   gardenScale -= event.delta * zoomSpeed;
