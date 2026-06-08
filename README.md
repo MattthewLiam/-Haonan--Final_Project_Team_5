@@ -1,9 +1,11 @@
-# Final Project
+# IDEA9103 Final Project
 Xuelin Ma SID xuma0701
+
+Weixi Qian SID wqia9153
 
 Yanhan Wei SID ywei0292
 
-Weixi Qian SID wqia9153
+
 
 ## Part 1: Project Direction
 
@@ -69,8 +71,9 @@ Together, these mechanics create a surreal digital environment that constantly e
 | Team Member | Mechanic |
 |---|---|
 | Xuelin Ma, xuma0701 | Perlin Noise & Randomness & Time-based |
-| Yanhan Wei, ywei0292 | Audio |
 | Weixi Qian, wqia9153 | User input |
+| Yanhan Wei, ywei0292 | Audio |
+
 
 ---
 
@@ -83,6 +86,29 @@ The user does not directly control this mechanic. Instead, the system behaves li
 ![FlowerPart](Team_Doc/flower_gif.gif)
 *(Flower Generation Demonstration)*
 
+---
+
+## User Input Mechanic
+
+User input provides users with a channel to interact with our work, allowing them to further experience our work. Besides, user input is also one of the keys to achieving 3D parallax. Truly good 3D parallax is not about something moving, but about the user feeling that their perspective is changing, and user input can act as the steering wheel for the user to control their perspective. By translating user input into changes in perspective and then making elements at different depths move to varying degrees, we can create a sense of three-dimensional space.
+
+3D parallax is essentially achieved by utilizing differences in movement speed. As shown in the image below, by reading the movement of the mouse, we can control the movement speed of the images before and after, creating a 3D illusion for our eyes, allowing us to perceive a 3D space that does not actually exist.
+
+![Image_7](Team_Doc/3d_parallax.gif)
+
+Next, let me introduce the User input interaction I designed for our project.
+
+Firstly, users can use their mouse to push the flowers aside to freely explore our garden.
+
+![User_input_interaction1](Team_Doc/userinput1.gif)
+
+Next, users can zoom in and out using the mouse wheel. In this step, I used the 3D parallax technique I mentioned above to make the flowers at different distances move at different speeds, thus creating the illusion of moving forward in a 2D scene, just like moving through a flower bush.
+
+![User_input_interaction2](Team_Doc/userinput2.gif)
+
+Finally, I also added the function to freely move the view by holding down the left mouse button, making it easier for users to explore freely even after zooming in.
+
+![User_input_interaction3](Team_Doc/userinput3.gif)
 
 ---
 
@@ -110,30 +136,6 @@ When the user introduces a sudden sound—such as a shout, a clap, or blowing in
 * **Performance Optimization:** Because `copy()` is highly CPU-intensive, I implemented a `min()` constraint to cap the maximum number of tears per frame, ensuring the sketch maintains a smooth 60 FPS even during the loudest audio spikes.
 
 *(Note: In the final integrated build, this distortion evolves further into "Danger Mode," turning the background blood-red, draining the flowers of color, and revealing eerie, inverted faces using `blendMode(DIFFERENCE)`.)*
-
----
-
-## User Input Mechanic
-
-User input provides users with a channel to interact with our work, allowing them to further experience our work. Besides, user input is also one of the keys to achieving 3D parallax. Truly good 3D parallax is not about something moving, but about the user feeling that their perspective is changing, and user input can act as the steering wheel for the user to control their perspective. By translating user input into changes in perspective and then making elements at different depths move to varying degrees, we can create a sense of three-dimensional space.
-
-3D parallax is essentially achieved by utilizing differences in movement speed. As shown in the image below, by reading the movement of the mouse, we can control the movement speed of the images before and after, creating a 3D illusion for our eyes, allowing us to perceive a 3D space that does not actually exist.
-
-![Image_7](Team_Doc/3d_parallax.gif)
-
-Next, let me introduce the User input interaction I designed for our project.
-
-Firstly, users can use their mouse to push the flowers aside to freely explore our garden.
-
-![User_input_interaction1](Team_Doc/userinput1.gif)
-
-Next, users can zoom in and out using the mouse wheel. In this step, I used the 3D parallax technique I mentioned above to make the flowers at different distances move at different speeds, thus creating the illusion of moving forward in a 2D scene, just like moving through a flower bush.
-
-![User_input_interaction2](Team_Doc/userinput2.gif)
-
-Finally, I also added the function to freely move the view by holding down the left mouse button, making it easier for users to explore freely even after zooming in.
-
-![User_input_interaction3](Team_Doc/userinput3.gif)
 
 ---
 
