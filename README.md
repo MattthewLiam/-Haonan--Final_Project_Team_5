@@ -84,6 +84,7 @@ This mechanic focuses on building the generative flower system that forms the fo
 The user does not directly control this mechanic. Instead, the system behaves like a living digital environment that evolves on its own over time. This connects closely to our project vision of creating an unstable and immersive digital garden. The procedural growth of the flowers provides the calm visual foundation of the piece, which can later become distorted by audio glitches and spatial perception effects caused by user interaction.
 
 ![FlowerPart](Team_Doc/flower_gif.gif)
+
 *(Flower Generation Demonstration)*
 
 ---
