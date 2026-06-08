@@ -1,11 +1,9 @@
 # IDEA9103 Final Project
-Xuelin Ma SID xuma0701
+Xuelin Ma xuma0701 SID 550892553
 
-Weixi Qian SID wqia9153
+Weixi Qian wqia9153 SID 530007980
 
-Yanhan Wei SID ywei0292
-
-
+Yanhan Wei ywei0292 SID 550854160
 
 ## Part 1: Project Direction
 
